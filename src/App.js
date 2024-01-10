@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {  Grid, ThemeProvider } from "@mui/material";
+import theme from "./theme/theme"
+import Header from "./components/Header/index"
+import SearchBar from "./components/SearchBar/SearchBar";
+import JobCard from "./components/Job/JobCard";
+import NewJobModel from "./components/Job/NewJobModel";
+import jobData from "./dummyData"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default () => {
+  
+  return <ThemeProvider theme={theme}>
+    <Header></Header>
+    <NewJobModel/>
+    {/* <ViewJobModel/> */}
+    <Grid container justifyContent="center">
+      <Grid item xs={10}>
+        <SearchBar/>  
 
-export default App;
+       
+        {jobData.map(job=><JobCard key={job.id} {...job}/>)}
+        {/* <JobCard/>   
+        <JobCard/> 
+        <JobCard/>     */}
+      </Grid>
+    </Grid>
+  </ThemeProvider>;
+};
